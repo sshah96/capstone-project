@@ -1,21 +1,12 @@
 from nba_api.live.nba.endpoints import scoreboard
-from nba_api.live.nba.endpoints import boxscore
 from nba_api.stats.endpoints import playerdashboardbyyearoveryear
 import json
 import ndjson
 import pandas as pd
 
 games = scoreboard.ScoreBoard()
-box_score = boxscore.BoxScore('0042400301')
 
 score = games.get_dict()
-
-
-box_score_dict = box_score.get_dict()
-# print(box_score_dict['game']['homeTeam']['players'][0])
-
-career = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear('1628384')
-# print(career.get_data_frames()[0]['REB'] / career.get_data_frames()[0]['GP'] )
 
 relevant_data = []
 
@@ -38,6 +29,8 @@ for game in games:
     all_player_stats.to_json("player_stats.ndjson",
             orient="records",
             lines=True)
-
-# print(score['scoreboard']['games'][0]['gameLeaders']['homeLeaders'])
-# print(len(score['scoreboard']['games']))
+    
+# Future work: get more data than just the leaders!
+# box_score_dict = box_score.get_dict()
+# print(box_score_dict['game']['homeTeam']['players'])
+# box_score = boxscore.BoxScore('0042400301')
