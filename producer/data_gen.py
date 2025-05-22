@@ -5,6 +5,7 @@ import ndjson
 import pandas as pd
 
 games = scoreboard.ScoreBoard()
+print(games.score_board_date)
 
 score = games.get_dict()
 
@@ -21,14 +22,18 @@ for game in games:
         ndjson.dump([player_home_stats, player_away_stats], f)
     player_id_home = player_home_stats['personId']
     player_id_away = player_away_stats['personId']
+    
     career_home = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(f'{player_id_home}').get_data_frames()[0]
-    career_home = career_home.iloc[:, 2:30]
-    career_home['PERSON_ID'] = player_id_home
+    home_player_season = career_home[['TEAM_ABBREVIATION', 'PTS', 'REB', 'AST']]
+    home_player_season['PERSON_ID'] = player_id_home
+    print(home_player_season)
+    
     career_away = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(f'{player_id_away}').get_data_frames()[0]
-    career_away = career_away.iloc[:, 2:30]
-    career_away['PERSON_ID'] = player_id_away
+    away_player_season = career_away[['TEAM_ABBREVIATION', 'PTS', 'REB', 'AST']]
+    away_player_season['PERSON_ID'] = player_id_home
+    print(away_player_season)
 
-    all_player_stats = pd.concat([career_home, career_away])
+    all_player_stats = pd.concat([home_player_season, away_player_season])
 
     all_player_stats.to_json("player_stats.ndjson",
             orient="records",
