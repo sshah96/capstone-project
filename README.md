@@ -1,7 +1,7 @@
 # capstone-project
 Final Project for DE Bootcamp
 
-##Generate Data
+## Generate Data
 Start by going to **data_gen.py** and seeing what data for players you get. Notes:
 1. The live data element is the current scoreboard (the games currently being played). If there are no games being played currently, it is showing the most recent set of games.
 2. We only get the data associated with each team's scoring leader.
@@ -9,7 +9,7 @@ Start by going to **data_gen.py** and seeing what data for players you get. Note
 4. This file should generate newline delimited json for the live game (stat leaders) as well as their respective season statistics.
 
 
-##Produce Topics
+## Produce Topics
 Then you run **producer.py** on the command line:
 1. Use the appropriate arguments (config file with the correct user and password and the topic you want to publish to). 
 2. You also want to modify the ndjson file that producer.py reads in (e.g. player_stats is for the regular season and nba_score is for the playoffs - I have published these datasets to separate topics to correspond to that).
@@ -17,7 +17,7 @@ Then you run **producer.py** on the command line:
 
 ![images/topics.png](images/topics.png)
 
-##KSQL
+## KSQL
 Once you have messages published to the topics, you can start to query the data with KSQLDB. Start a cluster in Confluent, and create the streams shown in **queries.sql**. The streams will show in the Streams page in your ksqlDB cluster:
 
 ![images/streams.png](images/streams.png)
