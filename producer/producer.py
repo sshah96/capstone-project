@@ -3,7 +3,7 @@ from confluent_kafka.cimpl import Producer
 import ccloud_lib
 
 # config values
-input_file="github_all_columns.ndjson"
+input_file="nba_score.json"
 num_messages=-1 #Modify this to restrict number of messages. -1 disables the restriction
 
 def read_file(file, num_messages):
